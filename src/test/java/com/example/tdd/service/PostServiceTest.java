@@ -1,20 +1,20 @@
 package com.example.tdd.service;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.BDDMockito.any;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.verify;
+
 import com.example.tdd.dto.PostRequestDTO;
 import com.example.tdd.entity.PostEntity;
 import com.example.tdd.repository.PostRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.util.ReflectionTestUtils;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.BDDMockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class PostServiceTest {
@@ -66,4 +66,16 @@ class PostServiceTest {
         verify(postRepository).save(any(PostEntity.class));
     }
 
+    @Test
+    void create_테스트3() {
+        //given
+        PostRequestDTO requestDTO = new PostRequestDTO();
+        requestDTO.setTitle("");
+        requestDTO.setContent("내용");
+
+        //when & then
+        assertThrows(IllegalArgumentException.class, () ->{
+            postService.create(requestDTO);
+        });
+    }
 }

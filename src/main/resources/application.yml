@@ -11,12 +11,10 @@ spring:
     hikari:
       maximum-pool-size: 50
 
-#  web:
-#    resources:
-#      static-locations: classpath:/static/
-#
-#  mvc:
-#    static-path-pattern: /static/**
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
 
   jpa:
     hibernate:
@@ -27,4 +25,3 @@ spring:
         format_sql: true
       default_batch_fetch_size: 100
     open-in-view: false
-
